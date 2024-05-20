@@ -3,8 +3,8 @@ import '@fontsource-variable/source-serif-4'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ErrorComponent, RouterProvider, createRouter } from '@tanstack/react-router'
 import ReactDOM from 'react-dom/client'
-import { routeTree } from './routeTree.gen'
 import { auth } from '~/utils/auth'
+import { routeTree } from './routeTree.gen'
 import '~/styles/index.css'
 
 export const queryClient = new QueryClient()

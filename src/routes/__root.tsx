@@ -1,11 +1,11 @@
-import { Link, Outlet, createRootRouteWithContext, useRouterState } from '@tanstack/react-router'
-import { Toaster } from '~/components/ui/sonner'
-import { ThemeToggle } from '~/components/theme-toggle'
-import { cn } from '~/utils/cn'
-import { Auth } from '~/utils/auth'
-import { QueryClient } from '@tanstack/react-query'
 import { GitHubLogoIcon } from '@radix-ui/react-icons'
+import type { QueryClient } from '@tanstack/react-query'
+import { Link, Outlet, createRootRouteWithContext, useRouterState } from '@tanstack/react-router'
+import { ThemeToggle } from '~/components/theme-toggle'
 import { Button } from '~/components/ui/button'
+import { Toaster } from '~/components/ui/sonner'
+import type { Auth } from '~/utils/auth'
+import { cn } from '~/utils/cn'
 
 export const Route = createRootRouteWithContext<{
   auth: Auth
