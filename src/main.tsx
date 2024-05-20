@@ -5,10 +5,11 @@ import { ErrorComponent, RouterProvider, createRouter } from '@tanstack/react-ro
 import ReactDOM from 'react-dom/client'
 import { routeTree } from './routeTree.gen'
 import '~/styles/index.css'
-import { useSessionStorage } from '~/hooks/use-session-storage'
-import { Card, CardContent } from '~/components/ui/card'
 import { Button } from '~/components/ui/button'
+import { Card, CardContent } from '~/components/ui/card'
 import { Slider } from '~/components/ui/slider'
+import { useSessionStorage } from '~/hooks/use-session-storage'
+import { auth } from '~/utils/auth'
 
 export const queryClient = new QueryClient()
 
@@ -56,13 +57,23 @@ function App() {
           </div>
         </CardContent>
       </Card>
-      <RouterProvider router={router} defaultPendingMs={pendingMs} defaultPendingMinMs={pendingMinMs} />
+      <RouterProvider
+        router={router}
+        defaultPreload="intent"
+        defaultPendingMs={pendingMs}
+        defaultPendingMinMs={pendingMinMs}
+        context={{ auth }}
+      />
     </>
   )
 }
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <QueryClientProvider client={queryClient}>
-    <App />
-  </QueryClientProvider>,
-)
+const rootElement = document.getElementById('root')!
+if (!rootElement.innerHTML) {
+  const root = ReactDOM.createRoot(rootElement)
+  root.render(
+    <QueryClientProvider client={queryClient}>
+      <App />
+    </QueryClientProvider>,
+  )
+}
