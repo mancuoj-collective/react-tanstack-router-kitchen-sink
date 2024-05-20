@@ -44,8 +44,12 @@ function Root() {
                   to={to}
                   activeOptions={{}}
                   preload="intent"
-                  className="block px-5 py-3 text-foreground/70"
-                  activeProps={{ className: 'text-foreground/100' }}
+                  className="block px-5 py-3"
+                  style={{ opacity: 0.6 }}
+                  // `style`'s are merged, `className`'s are concatenated
+                  activeProps={{
+                    style: { opacity: 1 },
+                  }}
                 >
                   {label}
                 </Link>
