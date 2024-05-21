@@ -1,8 +1,8 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router'
-import { type FormEvent, useState, useLayoutEffect } from 'react'
+import { type FormEvent, useLayoutEffect, useState } from 'react'
+import { z } from 'zod'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
-import { z } from 'zod'
 
 export const Route = createFileRoute('/login')({
   validateSearch: z.object({

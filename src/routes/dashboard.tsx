@@ -19,7 +19,7 @@ function DashboardComponent() {
           <Link
             key={to}
             to={to}
-            className="p-3"
+            className="bg-muted/20 p-3"
             style={{ opacity: 0.6 }}
             activeOptions={{ exact }}
             activeProps={{ style: { opacity: 1 } }}

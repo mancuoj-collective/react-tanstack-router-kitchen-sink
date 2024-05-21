@@ -16,12 +16,12 @@ export async function actionDelayFn<T>(fn: (...args: any[]) => Promise<T> | T) {
 
 export function shuffle<T>(arr: T[]): T[] {
   let i = arr.length
-  if (i == 0) return arr
+  if (i === 0) return arr
   const copy = [...arr]
   while (--i) {
-    let j = Math.floor(Math.random() * (i + 1))
-    let a = copy[i]
-    let b = copy[j]
+    const j = Math.floor(Math.random() * (i + 1))
+    const a = copy[i]
+    const b = copy[j]
     copy[i] = b!
     copy[j] = a!
   }
