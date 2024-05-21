@@ -32,11 +32,12 @@ function Root() {
         </div>
       </div>
       <div className="flex flex-1">
-        <div className="w-56 divide-y border-r bg-muted/40">
+        <div className="w-48 divide-y border-r bg-muted/40">
           {[
             ['/', 'Home'],
             ['/layout-a', 'Layout A'],
             ['/layout-b', 'Layout B'],
+            ['/login', 'Login'],
           ].map(([to, label]) => {
             return (
               <div key={to}>
