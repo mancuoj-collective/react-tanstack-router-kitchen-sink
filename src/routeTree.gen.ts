@@ -12,9 +12,11 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
+import { Route as DashboardImport } from './routes/dashboard'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as IndexImport } from './routes/index'
+import { Route as DashboardIndexImport } from './routes/dashboard.index'
 import { Route as LayoutLayoutBImport } from './routes/_layout.layout-b'
 import { Route as LayoutLayoutAImport } from './routes/_layout.layout-a'
 import { Route as AuthProfileImport } from './routes/_auth.profile'
@@ -23,6 +25,11 @@ import { Route as AuthProfileImport } from './routes/_auth.profile'
 
 const LoginRoute = LoginImport.update({
   path: '/login',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardRoute = DashboardImport.update({
+  path: '/dashboard',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -39,6 +46,11 @@ const AuthRoute = AuthImport.update({
 const IndexRoute = IndexImport.update({
   path: '/',
   getParentRoute: () => rootRoute,
+} as any)
+
+const DashboardIndexRoute = DashboardIndexImport.update({
+  path: '/',
+  getParentRoute: () => DashboardRoute,
 } as any)
 
 const LayoutLayoutBRoute = LayoutLayoutBImport.update({
@@ -81,6 +93,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardImport
+      parentRoute: typeof rootRoute
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -109,6 +128,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutLayoutBImport
       parentRoute: typeof LayoutImport
     }
+    '/dashboard/': {
+      id: '/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof DashboardIndexImport
+      parentRoute: typeof DashboardImport
+    }
   }
 }
 
@@ -121,6 +147,7 @@ export const routeTree = rootRoute.addChildren({
     LayoutLayoutARoute,
     LayoutLayoutBRoute,
   }),
+  DashboardRoute: DashboardRoute.addChildren({ DashboardIndexRoute }),
   LoginRoute,
 })
 
