@@ -1,14 +1,20 @@
 import { createFileRoute, useRouter } from '@tanstack/react-router'
-import { type FormEvent, useState } from 'react'
+import { type FormEvent, useState, useLayoutEffect } from 'react'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
+import { z } from 'zod'
 
 export const Route = createFileRoute('/login')({
+  validateSearch: z.object({
+    redirect: z.string().optional(),
+  }),
+}).update({
   component: LoginComponent,
 })
 
 function LoginComponent() {
   const router = useRouter()
+  const search = Route.useSearch()
   const { auth, status } = Route.useRouteContext({
     select: ({ auth }) => ({ auth, status: auth.status }),
   })
@@ -20,6 +26,12 @@ function LoginComponent() {
     // invalidate all route matches
     router.invalidate()
   }
+
+  useLayoutEffect(() => {
+    if (status === 'loggedIn' && search.redirect) {
+      router.history.push(search.redirect)
+    }
+  }, [status, search.redirect])
 
   if (status === 'loggedIn') {
     return (

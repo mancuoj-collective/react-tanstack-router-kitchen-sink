@@ -37,6 +37,7 @@ function Root() {
             ['/', 'Home'],
             ['/layout-a', 'Layout A'],
             ['/layout-b', 'Layout B'],
+            ['/profile', 'Profile'],
             ['/login', 'Login'],
           ].map(([to, label]) => {
             return (

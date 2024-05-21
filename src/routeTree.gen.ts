@@ -13,9 +13,11 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as LoginImport } from './routes/login'
 import { Route as LayoutImport } from './routes/_layout'
+import { Route as AuthImport } from './routes/_auth'
 import { Route as IndexImport } from './routes/index'
 import { Route as LayoutLayoutBImport } from './routes/_layout.layout-b'
 import { Route as LayoutLayoutAImport } from './routes/_layout.layout-a'
+import { Route as AuthProfileImport } from './routes/_auth.profile'
 
 // Create/Update Routes
 
@@ -26,6 +28,11 @@ const LoginRoute = LoginImport.update({
 
 const LayoutRoute = LayoutImport.update({
   id: '/_layout',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AuthRoute = AuthImport.update({
+  id: '/_auth',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -44,6 +51,11 @@ const LayoutLayoutARoute = LayoutLayoutAImport.update({
   getParentRoute: () => LayoutRoute,
 } as any)
 
+const AuthProfileRoute = AuthProfileImport.update({
+  path: '/profile',
+  getParentRoute: () => AuthRoute,
+} as any)
+
 // Populate the FileRoutesByPath interface
 
 declare module '@tanstack/react-router' {
@@ -53,6 +65,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
+    '/_auth': {
+      id: '/_auth'
+      path: ''
+      fullPath: ''
+      preLoaderRoute: typeof AuthImport
       parentRoute: typeof rootRoute
     }
     '/_layout': {
@@ -68,6 +87,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/login'
       preLoaderRoute: typeof LoginImport
       parentRoute: typeof rootRoute
+    }
+    '/_auth/profile': {
+      id: '/_auth/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthProfileImport
+      parentRoute: typeof AuthImport
     }
     '/_layout/layout-a': {
       id: '/_layout/layout-a'
@@ -90,6 +116,7 @@ declare module '@tanstack/react-router' {
 
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
+  AuthRoute: AuthRoute.addChildren({ AuthProfileRoute }),
   LayoutRoute: LayoutRoute.addChildren({
     LayoutLayoutARoute,
     LayoutLayoutBRoute,
