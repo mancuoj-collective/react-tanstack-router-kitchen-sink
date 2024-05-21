@@ -14,12 +14,21 @@ export const Route = createRootRouteWithContext<{
   component: Root,
 })
 
+const routes = [
+  ['/', 'Home'],
+  ['/dashboard', 'Dashboard'],
+  ['/layout-a', 'Layout A'],
+  ['/layout-b', 'Layout B'],
+  ['/profile', 'Profile'],
+  ['/login', 'Login'],
+]
+
 function Root() {
   const isLoading = useRouterState({ select: (s) => s.status === 'pending' })
 
   return (
     <div className="relative flex min-h-dvh flex-col overflow-hidden font-sans antialiased">
-      <div className="flex items-center gap-5 border-b bg-muted/40 px-5 py-3.5">
+      <div className="flex items-center gap-5 border-b bg-muted/50 px-5 py-3.5">
         <h1 className="font-serif text-3xl font-bold">Kitchen Sink</h1>
         <span className={cn('i-lucide-loader animate-spin text-xl', { hidden: !isLoading })} />
         <div className="ml-auto flex items-center">
@@ -32,14 +41,8 @@ function Root() {
         </div>
       </div>
       <div className="flex flex-1">
-        <div className="w-48 divide-y border-r bg-muted/40">
-          {[
-            ['/', 'Home'],
-            ['/layout-a', 'Layout A'],
-            ['/layout-b', 'Layout B'],
-            ['/profile', 'Profile'],
-            ['/login', 'Login'],
-          ].map(([to, label]) => {
+        <div className="w-48 divide-y border-r bg-muted/50">
+          {routes.map(([to, label]) => {
             return (
               <div key={to}>
                 <Link
