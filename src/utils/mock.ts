@@ -1,6 +1,6 @@
 import axios from 'redaxios'
 import { loaderDelayFn } from './delay'
-import type { Invoice, User } from './types'
+import type { Invoice, User } from '../types'
 
 let invoices: Invoice[] = null!
 let invoicesPromise: Promise<void>
@@ -18,6 +18,18 @@ const ensureInvoices = async () => {
 
 export async function fetchInvoices() {
   return loaderDelayFn(() => ensureInvoices().then(() => invoices))
+}
+
+export async function fetchInvoiceById(id: number) {
+  return loaderDelayFn(() =>
+    ensureInvoices().then(() => {
+      const invoice = invoices.find((d) => d.id === id)
+      if (!invoice) {
+        throw new Error('Invoice not found')
+      }
+      return invoice
+    }),
+  )
 }
 
 let users: User[] = null!

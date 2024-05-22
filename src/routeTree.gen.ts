@@ -17,9 +17,12 @@ import { Route as LayoutImport } from './routes/_layout'
 import { Route as AuthImport } from './routes/_auth'
 import { Route as IndexImport } from './routes/index'
 import { Route as DashboardIndexImport } from './routes/dashboard.index'
+import { Route as DashboardInvoicesImport } from './routes/dashboard.invoices'
 import { Route as LayoutLayoutBImport } from './routes/_layout.layout-b'
 import { Route as LayoutLayoutAImport } from './routes/_layout.layout-a'
 import { Route as AuthProfileImport } from './routes/_auth.profile'
+import { Route as DashboardInvoicesIndexImport } from './routes/dashboard.invoices.index'
+import { Route as DashboardInvoicesInvoiceIdImport } from './routes/dashboard.invoices.$invoiceId'
 
 // Create/Update Routes
 
@@ -53,6 +56,11 @@ const DashboardIndexRoute = DashboardIndexImport.update({
   getParentRoute: () => DashboardRoute,
 } as any)
 
+const DashboardInvoicesRoute = DashboardInvoicesImport.update({
+  path: '/invoices',
+  getParentRoute: () => DashboardRoute,
+} as any)
+
 const LayoutLayoutBRoute = LayoutLayoutBImport.update({
   path: '/layout-b',
   getParentRoute: () => LayoutRoute,
@@ -67,6 +75,18 @@ const AuthProfileRoute = AuthProfileImport.update({
   path: '/profile',
   getParentRoute: () => AuthRoute,
 } as any)
+
+const DashboardInvoicesIndexRoute = DashboardInvoicesIndexImport.update({
+  path: '/',
+  getParentRoute: () => DashboardInvoicesRoute,
+} as any)
+
+const DashboardInvoicesInvoiceIdRoute = DashboardInvoicesInvoiceIdImport.update(
+  {
+    path: '/$invoiceId',
+    getParentRoute: () => DashboardInvoicesRoute,
+  } as any,
+)
 
 // Populate the FileRoutesByPath interface
 
@@ -128,12 +148,33 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutLayoutBImport
       parentRoute: typeof LayoutImport
     }
+    '/dashboard/invoices': {
+      id: '/dashboard/invoices'
+      path: '/invoices'
+      fullPath: '/dashboard/invoices'
+      preLoaderRoute: typeof DashboardInvoicesImport
+      parentRoute: typeof DashboardImport
+    }
     '/dashboard/': {
       id: '/dashboard/'
       path: '/'
       fullPath: '/dashboard/'
       preLoaderRoute: typeof DashboardIndexImport
       parentRoute: typeof DashboardImport
+    }
+    '/dashboard/invoices/$invoiceId': {
+      id: '/dashboard/invoices/$invoiceId'
+      path: '/$invoiceId'
+      fullPath: '/dashboard/invoices/$invoiceId'
+      preLoaderRoute: typeof DashboardInvoicesInvoiceIdImport
+      parentRoute: typeof DashboardInvoicesImport
+    }
+    '/dashboard/invoices/': {
+      id: '/dashboard/invoices/'
+      path: '/'
+      fullPath: '/dashboard/invoices/'
+      preLoaderRoute: typeof DashboardInvoicesIndexImport
+      parentRoute: typeof DashboardInvoicesImport
     }
   }
 }
@@ -147,7 +188,13 @@ export const routeTree = rootRoute.addChildren({
     LayoutLayoutARoute,
     LayoutLayoutBRoute,
   }),
-  DashboardRoute: DashboardRoute.addChildren({ DashboardIndexRoute }),
+  DashboardRoute: DashboardRoute.addChildren({
+    DashboardInvoicesRoute: DashboardInvoicesRoute.addChildren({
+      DashboardInvoicesInvoiceIdRoute,
+      DashboardInvoicesIndexRoute,
+    }),
+    DashboardIndexRoute,
+  }),
   LoginRoute,
 })
 

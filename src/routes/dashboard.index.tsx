@@ -3,12 +3,12 @@ import { createFileRoute } from '@tanstack/react-router'
 import { invoicesQueryOptions } from '~/utils/api'
 
 export const Route = createFileRoute('/dashboard/')({
-  loader: ({ context }) => context.queryClient.ensureQueryData(invoicesQueryOptions),
+  loader: ({ context }) => context.queryClient.ensureQueryData(invoicesQueryOptions()),
   component: DashboardIndexComponent,
 })
 
 function DashboardIndexComponent() {
-  const invoicesQuery = useSuspenseQuery(invoicesQueryOptions)
+  const invoicesQuery = useSuspenseQuery(invoicesQueryOptions())
   const invoices = invoicesQuery.data
 
   return (
