@@ -1,6 +1,6 @@
 import axios from 'redaxios'
-import { loaderDelayFn } from './delay'
 import type { Invoice, User } from '../types'
+import { loaderDelayFn } from './delay'
 
 let invoices: Invoice[] = null!
 let invoicesPromise: Promise<void>

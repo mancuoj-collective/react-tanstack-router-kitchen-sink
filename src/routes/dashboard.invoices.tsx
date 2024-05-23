@@ -13,8 +13,8 @@ function InvoicesComponent() {
   const invoices = invoicesQuery.data
 
   return (
-    <div className="flex">
-      <div className="flex w-40 flex-col divide-y border-b border-r">
+    <div className="flex flex-1">
+      <div className="flex h-full w-44 flex-col divide-y border-r">
         {invoices.map((invoice) => (
           <Link
             key={invoice.id}

@@ -12,7 +12,7 @@ const routes = [
 
 function DashboardComponent() {
   return (
-    <div>
+    <>
       <h2 className="border-b bg-muted/30 p-3">Dashboard</h2>
       <div className="flex divide-x border-b">
         {routes.map(([to, label, exact]) => (
@@ -29,6 +29,6 @@ function DashboardComponent() {
         ))}
       </div>
       <Outlet />
-    </div>
+    </>
   )
 }

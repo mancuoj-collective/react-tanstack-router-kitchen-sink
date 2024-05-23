@@ -27,7 +27,7 @@ function Root() {
   const isLoading = useRouterState({ select: (s) => s.status === 'pending' })
 
   return (
-    <div className="relative flex min-h-dvh flex-col overflow-hidden font-sans antialiased">
+    <div className="flex h-dvh flex-col font-sans antialiased">
       <div className="flex items-center gap-5 border-b bg-muted/40 px-5 py-3.5">
         <h1 className="font-serif text-3xl font-bold">Kitchen Sink</h1>
         <span className={cn('i-lucide-loader animate-spin text-xl', { hidden: !isLoading })} />
@@ -41,7 +41,7 @@ function Root() {
         </div>
       </div>
       <div className="flex flex-1">
-        <div className="w-48 divide-y border-r bg-muted/40">
+        <div className="w-52 divide-y border-r bg-muted/40">
           {routes.map(([to, label]) => {
             return (
               <div key={to}>
@@ -62,7 +62,7 @@ function Root() {
             )
           })}
         </div>
-        <div className="flex-1">
+        <div className="flex flex-1 flex-col">
           <Outlet />
         </div>
       </div>
