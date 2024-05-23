@@ -30,7 +30,7 @@ function Root() {
     <div className="flex h-dvh flex-col font-sans antialiased">
       <div className="flex items-center gap-5 border-b bg-muted/40 px-5 py-3.5">
         <h1 className="font-serif text-3xl font-bold">Kitchen Sink</h1>
-        <span className={cn('i-lucide-loader animate-spin text-xl', { hidden: !isLoading })} />
+        <span className={cn('i-lucide-loader-circle animate-spin text-xl', { hidden: !isLoading })} />
         <div className="ml-auto flex items-center">
           <Button asChild variant="ghost" size="icon">
             <a href="https://github.com/mancuoj-collective/react-tanstack-router-kitchen-sink">
@@ -41,7 +41,7 @@ function Root() {
         </div>
       </div>
       <div className="flex flex-1">
-        <div className="w-52 divide-y border-r bg-muted/40">
+        <div className="w-56 divide-y border-r bg-muted/40">
           {routes.map(([to, label]) => {
             return (
               <div key={to}>
@@ -51,7 +51,6 @@ function Root() {
                   preload="intent"
                   className="block px-5 py-3"
                   style={{ opacity: 0.6 }}
-                  // `style`'s are merged, `className`'s are concatenated
                   activeProps={{
                     style: { opacity: 1 },
                   }}

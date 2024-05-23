@@ -20,7 +20,9 @@ import { Route as DashboardIndexImport } from './routes/dashboard/index'
 import { Route as LayoutLayoutBImport } from './routes/_layout/layout-b'
 import { Route as LayoutLayoutAImport } from './routes/_layout/layout-a'
 import { Route as AuthProfileImport } from './routes/_auth/profile'
+import { Route as DashboardUsersRouteImport } from './routes/dashboard/users/route'
 import { Route as DashboardInvoicesRouteImport } from './routes/dashboard/invoices/route'
+import { Route as DashboardUsersIndexImport } from './routes/dashboard/users/index'
 import { Route as DashboardInvoicesIndexImport } from './routes/dashboard/invoices/index'
 import { Route as DashboardInvoicesInvoiceIdImport } from './routes/dashboard/invoices/$invoiceId'
 
@@ -71,9 +73,19 @@ const AuthProfileRoute = AuthProfileImport.update({
   getParentRoute: () => AuthRouteRoute,
 } as any)
 
+const DashboardUsersRouteRoute = DashboardUsersRouteImport.update({
+  path: '/users',
+  getParentRoute: () => DashboardRouteRoute,
+} as any)
+
 const DashboardInvoicesRouteRoute = DashboardInvoicesRouteImport.update({
   path: '/invoices',
   getParentRoute: () => DashboardRouteRoute,
+} as any)
+
+const DashboardUsersIndexRoute = DashboardUsersIndexImport.update({
+  path: '/',
+  getParentRoute: () => DashboardUsersRouteRoute,
 } as any)
 
 const DashboardInvoicesIndexRoute = DashboardInvoicesIndexImport.update({
@@ -132,6 +144,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardInvoicesRouteImport
       parentRoute: typeof DashboardRouteImport
     }
+    '/dashboard/users': {
+      id: '/dashboard/users'
+      path: '/users'
+      fullPath: '/dashboard/users'
+      preLoaderRoute: typeof DashboardUsersRouteImport
+      parentRoute: typeof DashboardRouteImport
+    }
     '/_auth/profile': {
       id: '/_auth/profile'
       path: '/profile'
@@ -174,6 +193,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardInvoicesIndexImport
       parentRoute: typeof DashboardInvoicesRouteImport
     }
+    '/dashboard/users/': {
+      id: '/dashboard/users/'
+      path: '/'
+      fullPath: '/dashboard/users/'
+      preLoaderRoute: typeof DashboardUsersIndexImport
+      parentRoute: typeof DashboardUsersRouteImport
+    }
   }
 }
 
@@ -190,6 +216,9 @@ export const routeTree = rootRoute.addChildren({
     DashboardInvoicesRouteRoute: DashboardInvoicesRouteRoute.addChildren({
       DashboardInvoicesInvoiceIdRoute,
       DashboardInvoicesIndexRoute,
+    }),
+    DashboardUsersRouteRoute: DashboardUsersRouteRoute.addChildren({
+      DashboardUsersIndexRoute,
     }),
     DashboardIndexRoute,
   }),

@@ -14,12 +14,12 @@ function InvoicesComponent() {
 
   return (
     <div className="flex flex-1">
-      <div className="flex h-full w-44 flex-col divide-y border-r">
+      <div className="flex h-full w-52 flex-col divide-y border-r">
         {invoices.map((invoice) => (
           <Link
             key={invoice.id}
             to="/dashboard/invoices/$invoiceId"
-            className="bg-muted/10 p-3"
+            className="bg-muted/10 px-5 py-3"
             style={{ opacity: 0.6 }}
             activeProps={{ style: { opacity: 1 } }}
             params={{
@@ -27,9 +27,11 @@ function InvoicesComponent() {
             }}
             preload="intent"
           >
-            #{invoice.id} - {invoice.title.slice(0, 10)}
+            <div className="line-clamp-1">
+              #{invoice.id} - {invoice.title}
+            </div>
             <MatchRoute to="/dashboard/invoices/$invoiceId" params={{ invoiceId: invoice.id }} pending>
-              {(match) => <span className={cn('i-lucide-loader animate-spin text-xl', { hidden: !match })} />}
+              {(match) => <span className={cn('i-lucide-loader-circle animate-spin text-xl', { hidden: !match })} />}
             </MatchRoute>
           </Link>
         ))}

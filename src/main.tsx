@@ -11,7 +11,11 @@ export const queryClient = new QueryClient()
 
 const router = createRouter({
   routeTree,
-  defaultPendingComponent: () => <div>Loading...</div>,
+  defaultPendingComponent: () => (
+    <div className="p-3">
+      <span className="i-lucide-loader-circle animate-spin text-xl" />
+    </div>
+  ),
   defaultErrorComponent: ({ error }) => <ErrorComponent error={error} />,
   context: {
     auth: undefined!, // We'll inject this when we render
@@ -35,8 +39,8 @@ if (!rootElement.innerHTML) {
       <RouterProvider
         router={router}
         defaultPreload="intent"
-        defaultPendingMs={1000}
-        defaultPendingMinMs={500}
+        defaultPendingMs={1600}
+        defaultPendingMinMs={800}
         context={{ auth }}
       />
     </QueryClientProvider>,

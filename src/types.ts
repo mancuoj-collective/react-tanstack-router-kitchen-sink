@@ -1,3 +1,5 @@
+export type PickAsRequired<TValue, TKey extends keyof TValue> = Omit<TValue, TKey> & Required<Pick<TValue, TKey>>
+
 export type Invoice = {
   id: number
   title: string

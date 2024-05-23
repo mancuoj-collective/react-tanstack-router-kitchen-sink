@@ -27,6 +27,7 @@
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "framer-motion": "^11.2.4",
+    "immer": "^10.1.1",
     "jotai": "^2.8.0",
     "jotai-dark": "^0.3.0",
     "jotai-effect": "^1.0.0",
