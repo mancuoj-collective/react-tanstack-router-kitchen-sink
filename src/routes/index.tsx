@@ -9,7 +9,7 @@ function Index() {
   return (
     <div>
       <h2 className="border-b bg-muted/30 p-3">Welcome Home 🐶</h2>
-      <Button asChild className="m-3">
+      <Button asChild variant="outline" className="m-3">
         <Link
           to="/dashboard/invoices/$invoiceId"
           params={{

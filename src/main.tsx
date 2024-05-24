@@ -4,14 +4,12 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { ErrorComponent, RouterProvider, createRouter } from '@tanstack/react-router'
 import ReactDOM from 'react-dom/client'
 import { Button } from '~/components/ui/button'
-import { Card } from '~/components/ui/card'
+import { Dialog, DialogContent, DialogTrigger } from '~/components/ui/dialog'
 import { Slider } from '~/components/ui/slider'
 import { useSessionStorage } from '~/hooks/use-session-storage'
 import { routeTree } from '~/routeTree.gen'
 import { auth } from '~/utils/auth'
 import '~/styles/index.css'
-import { Dialog, DialogContent, DialogTrigger } from './components/ui/dialog'
-import { Separator } from './components/ui/separator'
 
 export const queryClient = new QueryClient()
 
@@ -38,7 +36,7 @@ declare module '@tanstack/react-router' {
 }
 
 function App() {
-  const [loaderDelay, setLoaderDelay] = useSessionStorage('loaderDelay', 1000)
+  const [loaderDelay, setLoaderDelay] = useSessionStorage('loaderDelay', 600)
   const [pendingMs, setPendingMs] = useSessionStorage('pendingMs', 1000)
   const [pendingMinMs, setPendingMinMs] = useSessionStorage('pendingMinMs', 500)
 
@@ -53,13 +51,13 @@ function App() {
         </DialogTrigger>
         <DialogContent>
           <div className="flex flex-col gap-5 p-3">
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               <Button onClick={() => setLoaderDelay(150)}>Fast</Button>
               <Button onClick={() => setLoaderDelay(500)}>Fast 3G</Button>
               <Button onClick={() => setLoaderDelay(2000)}>Slow 3G</Button>
             </div>
             <div className="space-y-3">
-              <div>Loader Delay: {loaderDelay}ms</div>
+              <div>LoaderDelay: {loaderDelay}ms</div>
               <Slider
                 value={[loaderDelay]}
                 onValueChange={([value]) => setLoaderDelay(value)}

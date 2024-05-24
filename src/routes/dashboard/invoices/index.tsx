@@ -27,7 +27,12 @@ function InvoicesIndexComponent() {
       <form className="space-y-3 p-3" onSubmit={(e) => handleSubmit(e)}>
         <Input name="title" placeholder="Invoice Title" />
         <Textarea name="body" placeholder="Invoice Body" className="h-60" />
-        <Button type="submit" className="w-full" disabled={createInvoiceMutation.status === 'pending'}>
+        <Button
+          type="submit"
+          variant="outline"
+          className="w-full"
+          disabled={createInvoiceMutation.status === 'pending'}
+        >
           Create New Invoice
           <span
             className={cn('i-lucide-loader-circle animate-spin text-lg ml-3', {

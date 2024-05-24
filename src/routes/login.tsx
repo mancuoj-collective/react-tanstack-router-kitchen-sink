@@ -40,6 +40,7 @@ function LoginComponent() {
           Logged in as <strong>{auth.username}</strong>
         </div>
         <Button
+          variant="outline"
           onClick={() => {
             auth.logout()
             router.invalidate()
@@ -54,9 +55,11 @@ function LoginComponent() {
   return (
     <div className="space-y-3 p-3">
       <div>You must log in to access this page.</div>
-      <form onSubmit={onSubmit} className="flex gap-3">
+      <form onSubmit={onSubmit} className="flex gap-2">
         <Input className="w-52" placeholder="Username" value={username} onChange={(e) => setUsername(e.target.value)} />
-        <Button type="submit">Login</Button>
+        <Button type="submit" variant="outline">
+          Login
+        </Button>
       </form>
     </div>
   )
