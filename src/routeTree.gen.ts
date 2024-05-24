@@ -93,10 +93,12 @@ const DashboardInvoicesIndexRoute = DashboardInvoicesIndexImport.update({
   getParentRoute: () => DashboardInvoicesRouteRoute,
 } as any)
 
-const DashboardInvoicesInvoiceIdRoute = DashboardInvoicesInvoiceIdImport.update({
-  path: '/$invoiceId',
-  getParentRoute: () => DashboardInvoicesRouteRoute,
-} as any)
+const DashboardInvoicesInvoiceIdRoute = DashboardInvoicesInvoiceIdImport.update(
+  {
+    path: '/$invoiceId',
+    getParentRoute: () => DashboardInvoicesRouteRoute,
+  } as any,
+)
 
 // Populate the FileRoutesByPath interface
 
@@ -226,3 +228,90 @@ export const routeTree = rootRoute.addChildren({
 })
 
 /* prettier-ignore-end */
+
+/* ROUTE_MANIFEST_START
+{
+  "routes": {
+    "__root__": {
+      "filePath": "__root.tsx",
+      "children": [
+        "/",
+        "/_auth",
+        "/_layout",
+        "/dashboard",
+        "/login"
+      ]
+    },
+    "/": {
+      "filePath": "index.tsx"
+    },
+    "/_auth": {
+      "filePath": "_auth/route.tsx",
+      "children": [
+        "/_auth/profile"
+      ]
+    },
+    "/_layout": {
+      "filePath": "_layout/route.tsx",
+      "children": [
+        "/_layout/layout-a",
+        "/_layout/layout-b"
+      ]
+    },
+    "/dashboard": {
+      "filePath": "dashboard/route.tsx",
+      "children": [
+        "/dashboard/invoices",
+        "/dashboard/users",
+        "/dashboard/"
+      ]
+    },
+    "/login": {
+      "filePath": "login.tsx"
+    },
+    "/dashboard/invoices": {
+      "filePath": "dashboard/invoices/route.tsx",
+      "parent": "/dashboard",
+      "children": [
+        "/dashboard/invoices/$invoiceId",
+        "/dashboard/invoices/"
+      ]
+    },
+    "/dashboard/users": {
+      "filePath": "dashboard/users/route.tsx",
+      "parent": "/dashboard",
+      "children": [
+        "/dashboard/users/"
+      ]
+    },
+    "/_auth/profile": {
+      "filePath": "_auth/profile.tsx",
+      "parent": "/_auth"
+    },
+    "/_layout/layout-a": {
+      "filePath": "_layout/layout-a.tsx",
+      "parent": "/_layout"
+    },
+    "/_layout/layout-b": {
+      "filePath": "_layout/layout-b.tsx",
+      "parent": "/_layout"
+    },
+    "/dashboard/": {
+      "filePath": "dashboard/index.tsx",
+      "parent": "/dashboard"
+    },
+    "/dashboard/invoices/$invoiceId": {
+      "filePath": "dashboard/invoices/$invoiceId.tsx",
+      "parent": "/dashboard/invoices"
+    },
+    "/dashboard/invoices/": {
+      "filePath": "dashboard/invoices/index.tsx",
+      "parent": "/dashboard/invoices"
+    },
+    "/dashboard/users/": {
+      "filePath": "dashboard/users/index.tsx",
+      "parent": "/dashboard/users"
+    }
+  }
+}
+ROUTE_MANIFEST_END */

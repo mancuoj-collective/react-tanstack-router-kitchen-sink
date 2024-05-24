@@ -10,6 +10,7 @@ import { useSessionStorage } from '~/hooks/use-session-storage'
 import { routeTree } from '~/routeTree.gen'
 import { auth } from '~/utils/auth'
 import '~/styles/index.css'
+import { Separator } from './components/ui/separator'
 
 export const queryClient = new QueryClient()
 
@@ -37,6 +38,8 @@ declare module '@tanstack/react-router' {
 
 function App() {
   const [loaderDelay, setLoaderDelay] = useSessionStorage('loaderDelay', 1000)
+  const [pendingMs, setPendingMs] = useSessionStorage('pendingMs', 1000)
+  const [pendingMinMs, setPendingMinMs] = useSessionStorage('pendingMinMs', 500)
 
   return (
     <>
@@ -61,8 +64,25 @@ function App() {
             max={5000}
             step={100}
           />
+          <div>PendingMs: {pendingMs}ms</div>
+          <Slider value={[pendingMs]} onValueChange={([value]) => setPendingMs(value)} min={0} max={5000} step={100} />
+          <div>PendingMinMs: {pendingMinMs}ms</div>
+          <Slider
+            value={[pendingMinMs]}
+            onValueChange={([value]) => setPendingMinMs(value)}
+            min={0}
+            max={5000}
+            step={100}
+          />
         </div>
       </Card>
+      <RouterProvider
+        router={router}
+        defaultPreload="intent"
+        defaultPendingMs={pendingMs}
+        defaultPendingMinMs={pendingMinMs}
+        context={{ auth }}
+      />
     </>
   )
 }
@@ -73,13 +93,6 @@ if (!rootElement.innerHTML) {
   root.render(
     <QueryClientProvider client={queryClient}>
       <App />
-      <RouterProvider
-        router={router}
-        defaultPreload="intent"
-        defaultPendingMs={1600}
-        defaultPendingMinMs={800}
-        context={{ auth }}
-      />
     </QueryClientProvider>,
   )
 }
