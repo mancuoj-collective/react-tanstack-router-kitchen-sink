@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { toast } from 'sonner'
 import { InvoiceFields } from '~/components/invoice-fields'
 import { Button } from '~/components/ui/button'
@@ -12,6 +12,7 @@ export const Route = createFileRoute('/dashboard/invoices/')({
 
 function InvoicesIndexComponent() {
   const createInvoiceMutation = useCreateInvoiceMutation()
+  const formRef = useRef<HTMLFormElement>(null)
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -25,7 +26,8 @@ function InvoicesIndexComponent() {
 
   useEffect(() => {
     if (createInvoiceMutation.status === 'success') {
-      toast.success('Invoice created successfully')
+      toast.success('Created successfully')
+      formRef.current?.reset()
     } else if (createInvoiceMutation.status === 'error') {
       toast.error('Error creating invoice')
     }
@@ -33,7 +35,7 @@ function InvoicesIndexComponent() {
 
   return (
     <div>
-      <form className="space-y-3 p-3" onSubmit={(e) => handleSubmit(e)}>
+      <form ref={formRef} className="space-y-3 p-3" onSubmit={handleSubmit}>
         <InvoiceFields disabled={createInvoiceMutation.status === 'pending'} />
         <Button
           type="submit"
@@ -41,12 +43,12 @@ function InvoicesIndexComponent() {
           className="w-full"
           disabled={createInvoiceMutation.status === 'pending'}
         >
-          {createInvoiceMutation.status !== 'pending' ? (
-            <>Create New Invoice</>
-          ) : (
+          {createInvoiceMutation.status === 'pending' ? (
             <>
-              Creating <span className="i-lucide-loader-circle ml-3 animate-spin text-lg" />
+              <span className="i-lucide-loader-circle mr-3 animate-spin text-lg" /> Creating
             </>
+          ) : (
+            <>Create New Invoice</>
           )}
         </Button>
       </form>
