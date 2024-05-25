@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect } from 'react'
 import { toast } from 'sonner'
+import { InvoiceFields } from '~/components/invoice-fields'
 import { Button } from '~/components/ui/button'
-import { Input } from '~/components/ui/input'
-import { Textarea } from '~/components/ui/textarea'
+
 import { useCreateInvoiceMutation } from '~/utils/api'
 
 export const Route = createFileRoute('/dashboard/invoices/')({
@@ -34,8 +34,7 @@ function InvoicesIndexComponent() {
   return (
     <div>
       <form className="space-y-3 p-3" onSubmit={(e) => handleSubmit(e)}>
-        <Input name="title" placeholder="Invoice Title" />
-        <Textarea name="body" placeholder="Invoice Body" className="h-60" />
+        <InvoiceFields disabled={createInvoiceMutation.status === 'pending'} />
         <Button
           type="submit"
           variant="outline"
