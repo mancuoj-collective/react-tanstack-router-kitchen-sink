@@ -1,9 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { useEffect } from 'react'
+import { toast } from 'sonner'
 import { Button } from '~/components/ui/button'
 import { Input } from '~/components/ui/input'
 import { Textarea } from '~/components/ui/textarea'
 import { useCreateInvoiceMutation } from '~/utils/api'
-import { cn } from '~/utils/cn'
 
 export const Route = createFileRoute('/dashboard/invoices/')({
   component: InvoicesIndexComponent,
@@ -22,6 +23,14 @@ function InvoicesIndexComponent() {
     })
   }
 
+  useEffect(() => {
+    if (createInvoiceMutation.status === 'success') {
+      toast.success('Invoice created successfully')
+    } else if (createInvoiceMutation.status === 'error') {
+      toast.error('Error creating invoice')
+    }
+  }, [createInvoiceMutation.status])
+
   return (
     <div>
       <form className="space-y-3 p-3" onSubmit={(e) => handleSubmit(e)}>
@@ -33,12 +42,13 @@ function InvoicesIndexComponent() {
           className="w-full"
           disabled={createInvoiceMutation.status === 'pending'}
         >
-          Create New Invoice
-          <span
-            className={cn('i-lucide-loader-circle animate-spin text-lg ml-3', {
-              hidden: createInvoiceMutation.status !== 'pending',
-            })}
-          />
+          {createInvoiceMutation.status !== 'pending' ? (
+            <>Create New Invoice</>
+          ) : (
+            <>
+              Creating <span className="i-lucide-loader-circle ml-3 animate-spin text-lg" />
+            </>
+          )}
         </Button>
       </form>
     </div>

@@ -65,7 +65,7 @@ function Root() {
           <Outlet />
         </div>
       </div>
-      <Toaster />
+      <Toaster position="bottom-center" />
     </div>
   )
 }
