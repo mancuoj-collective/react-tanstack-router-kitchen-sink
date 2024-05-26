@@ -5,7 +5,7 @@ import { z } from 'zod'
 import { Input } from '~/components/ui/input'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~/components/ui/select'
 import { usersQueryOptions } from '~/utils/api'
-import { UsersSortBy } from '~/utils/mock'
+import type { UsersSortBy } from '~/utils/mock'
 
 export const Route = createFileRoute('/dashboard/users')({
   validateSearch: z.object({
