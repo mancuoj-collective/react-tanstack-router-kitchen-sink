@@ -110,3 +110,13 @@ export async function fetchUsers({ filterBy, sortBy }: { filterBy?: string; sort
     }),
   )
 }
+
+export async function fetchUserById(id: number) {
+  return loaderDelayFn(() => ensureUsers().then(() => users.find((d) => d.id === id)))
+}
+
+export async function fetchRandomNumber() {
+  return loaderDelayFn(() => {
+    return Math.random()
+  })
+}

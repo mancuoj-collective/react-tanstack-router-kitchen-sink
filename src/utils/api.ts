@@ -1,6 +1,14 @@
 import { queryOptions, useMutation } from '@tanstack/react-query'
 import { queryClient } from '~/main'
-import { fetchInvoiceById, fetchInvoices, patchInvoice, postInvoice } from './mock'
+import {
+  UsersSortBy,
+  fetchInvoiceById,
+  fetchInvoices,
+  fetchUserById,
+  fetchUsers,
+  patchInvoice,
+  postInvoice,
+} from './mock'
 
 export const invoicesQueryOptions = () =>
   queryOptions({
@@ -27,4 +35,16 @@ export const useUpdateInvoiceMutation = (invoiceId: number) =>
     mutationFn: patchInvoice,
     onSuccess: () => queryClient.invalidateQueries(),
     gcTime: 1000 * 10,
+  })
+
+export const usersQueryOptions = (opts: { filterBy?: string; sortBy?: UsersSortBy }) =>
+  queryOptions({
+    queryKey: ['users', opts],
+    queryFn: () => fetchUsers(opts),
+  })
+
+export const userQueryOptions = (userId: number) =>
+  queryOptions({
+    queryKey: ['users', userId],
+    queryFn: () => fetchUserById(userId),
   })
