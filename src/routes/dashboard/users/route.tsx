@@ -3,7 +3,15 @@ import { Link, Outlet, createFileRoute, useNavigate } from '@tanstack/react-rout
 import { useEffect, useMemo, useState } from 'react'
 import { z } from 'zod'
 import { Input } from '~/components/ui/input'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '~/components/ui/select'
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '~/components/ui/select'
 import { usersQueryOptions } from '~/utils/api'
 import type { UsersSortBy } from '~/utils/mock'
 
@@ -84,22 +92,21 @@ function UsersComponent() {
   return (
     <div className="flex flex-1">
       <div className="h-full w-60 border-r">
-        <div className="space-y-3 border-b p-3">
+        <div className="space-y-3 border-b px-3 py-5">
           <Select value={sortBy} onValueChange={setSortBy}>
             <SelectTrigger>
               <SelectValue placeholder="Sort by" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="name">Name</SelectItem>
-              <SelectItem value="id">ID</SelectItem>
-              <SelectItem value="email">Email</SelectItem>
+              <SelectGroup>
+                <SelectLabel>Sort by</SelectLabel>
+                <SelectItem value="name">Name</SelectItem>
+                <SelectItem value="id">ID</SelectItem>
+                <SelectItem value="email">Email</SelectItem>
+              </SelectGroup>
             </SelectContent>
           </Select>
-          <Input
-            placeholder="Filter by name ..."
-            value={filterDraft}
-            onChange={(e) => setFilterDraft(e.target.value)}
-          />
+          <Input placeholder="Filter by name" value={filterDraft} onChange={(e) => setFilterDraft(e.target.value)} />
         </div>
         <div className="flex flex-col divide-y">
           {filteredUsers.map((user) => (
