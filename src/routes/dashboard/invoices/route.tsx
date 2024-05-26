@@ -9,8 +9,7 @@ export const Route = createFileRoute('/dashboard/invoices')({
 })
 
 function InvoicesComponent() {
-  const invoicesQuery = useSuspenseQuery(invoicesQueryOptions())
-  const invoices = invoicesQuery.data
+  const { data: invoices } = useSuspenseQuery(invoicesQueryOptions())
 
   return (
     <div className="flex flex-1">
@@ -30,9 +29,6 @@ function InvoicesComponent() {
             <div className="line-clamp-1">
               #{invoice.id} - {invoice.title}
             </div>
-            <MatchRoute to="/dashboard/invoices/$invoiceId" params={{ invoiceId: invoice.id }} pending>
-              {(match) => <span className={cn('i-lucide-loader-circle animate-spin text-xl', { hidden: !match })} />}
-            </MatchRoute>
           </Link>
         ))}
       </div>
