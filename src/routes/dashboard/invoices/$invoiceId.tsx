@@ -44,7 +44,7 @@ function InvoiceComponent() {
   return (
     <form key={invoice.id} className="space-y-3 p-3" onSubmit={handleSubmit}>
       <InvoiceFields invoice={invoice} disabled={updateInvoiceMutation.status === 'pending'} />
-      <Button type="submit" variant="outline" className="w-full">
+      <Button type="submit" variant="outline" className="w-full" disabled={updateInvoiceMutation.status === 'pending'}>
         {updateInvoiceMutation.status === 'pending' ? (
           <>
             <span className="i-lucide-loader-circle mr-3 animate-spin text-lg" /> Saving

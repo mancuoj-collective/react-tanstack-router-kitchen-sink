@@ -1,6 +1,6 @@
 import { Input } from '~/components/ui/input'
 import { Textarea } from '~/components/ui/textarea'
-import { Invoice } from '~/types'
+import type { Invoice } from '~/types'
 
 interface InvoiceFieldsProps {
   invoice?: Invoice

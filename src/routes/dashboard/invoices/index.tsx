@@ -34,24 +34,17 @@ function InvoicesIndexComponent() {
   }, [createInvoiceMutation.status])
 
   return (
-    <div>
-      <form ref={formRef} className="space-y-3 p-3" onSubmit={handleSubmit}>
-        <InvoiceFields disabled={createInvoiceMutation.status === 'pending'} />
-        <Button
-          type="submit"
-          variant="outline"
-          className="w-full"
-          disabled={createInvoiceMutation.status === 'pending'}
-        >
-          {createInvoiceMutation.status === 'pending' ? (
-            <>
-              <span className="i-lucide-loader-circle mr-3 animate-spin text-lg" /> Creating
-            </>
-          ) : (
-            <>Create New Invoice</>
-          )}
-        </Button>
-      </form>
-    </div>
+    <form ref={formRef} className="space-y-3 p-3" onSubmit={handleSubmit}>
+      <InvoiceFields disabled={createInvoiceMutation.status === 'pending'} />
+      <Button type="submit" variant="outline" className="w-full" disabled={createInvoiceMutation.status === 'pending'}>
+        {createInvoiceMutation.status === 'pending' ? (
+          <>
+            <span className="i-lucide-loader-circle mr-3 animate-spin text-lg" /> Creating
+          </>
+        ) : (
+          <>Create New Invoice</>
+        )}
+      </Button>
+    </form>
   )
 }
