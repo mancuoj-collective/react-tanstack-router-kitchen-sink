@@ -10,7 +10,7 @@ const ensureInvoices = async () => {
   if (!invoicesPromise) {
     invoicesPromise = Promise.resolve().then(async () => {
       const { data } = await axios.get('https://jsonplaceholder.typicode.com/posts')
-      invoices = data.slice(0, 10)
+      invoices = data.slice(0, 50)
     })
   }
 
