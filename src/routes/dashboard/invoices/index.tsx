@@ -3,7 +3,6 @@ import { useEffect, useRef } from 'react'
 import { toast } from 'sonner'
 import { InvoiceFields } from '~/components/invoice-fields'
 import { Button } from '~/components/ui/button'
-
 import { useCreateInvoiceMutation } from '~/utils/api'
 
 export const Route = createFileRoute('/dashboard/invoices/')({
@@ -16,8 +15,7 @@ function InvoicesIndexComponent() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    e.stopPropagation()
-    const formData = new FormData(e.target as HTMLFormElement)
+    const formData = new FormData(e.currentTarget)
     createInvoiceMutation.mutate({
       title: formData.get('title') as string,
       body: formData.get('body') as string,

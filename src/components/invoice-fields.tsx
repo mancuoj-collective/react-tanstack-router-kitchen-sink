@@ -11,13 +11,7 @@ export function InvoiceFields({ invoice = {} as Invoice, disabled }: InvoiceFiel
   return (
     <>
       <Input name="title" placeholder="Invoice Title" defaultValue={invoice?.title} disabled={disabled} />
-      <Textarea
-        name="body"
-        placeholder="Invoice Body"
-        defaultValue={invoice?.body}
-        className="h-60"
-        disabled={disabled}
-      />
+      <Textarea name="body" placeholder="Invoice Body" defaultValue={invoice?.body} rows={10} disabled={disabled} />
     </>
   )
 }
