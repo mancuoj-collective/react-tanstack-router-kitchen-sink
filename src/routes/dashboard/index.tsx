@@ -8,8 +8,7 @@ export const Route = createFileRoute('/dashboard/')({
 })
 
 function DashboardIndexComponent() {
-  const invoicesQuery = useSuspenseQuery(invoicesQueryOptions())
-  const invoices = invoicesQuery.data
+  const { data: invoices } = useSuspenseQuery(invoicesQueryOptions())
 
   return (
     <div className="p-3">

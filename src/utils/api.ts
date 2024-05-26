@@ -1,7 +1,7 @@
 import { queryOptions, useMutation } from '@tanstack/react-query'
 import { queryClient } from '~/main'
 import {
-  UsersSortBy,
+  type UsersSortBy,
   fetchInvoiceById,
   fetchInvoices,
   fetchUserById,

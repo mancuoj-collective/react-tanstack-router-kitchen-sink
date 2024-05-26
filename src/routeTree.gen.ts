@@ -24,6 +24,7 @@ import { Route as DashboardUsersRouteImport } from './routes/dashboard/users/rou
 import { Route as DashboardInvoicesRouteImport } from './routes/dashboard/invoices/route'
 import { Route as DashboardUsersIndexImport } from './routes/dashboard/users/index'
 import { Route as DashboardInvoicesIndexImport } from './routes/dashboard/invoices/index'
+import { Route as DashboardUsersUserImport } from './routes/dashboard/users/user'
 import { Route as DashboardInvoicesInvoiceIdImport } from './routes/dashboard/invoices/$invoiceId'
 
 // Create/Update Routes
@@ -91,6 +92,11 @@ const DashboardUsersIndexRoute = DashboardUsersIndexImport.update({
 const DashboardInvoicesIndexRoute = DashboardInvoicesIndexImport.update({
   path: '/',
   getParentRoute: () => DashboardInvoicesRouteRoute,
+} as any)
+
+const DashboardUsersUserRoute = DashboardUsersUserImport.update({
+  path: '/user',
+  getParentRoute: () => DashboardUsersRouteRoute,
 } as any)
 
 const DashboardInvoicesInvoiceIdRoute = DashboardInvoicesInvoiceIdImport.update(
@@ -188,6 +194,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DashboardInvoicesInvoiceIdImport
       parentRoute: typeof DashboardInvoicesRouteImport
     }
+    '/dashboard/users/user': {
+      id: '/dashboard/users/user'
+      path: '/user'
+      fullPath: '/dashboard/users/user'
+      preLoaderRoute: typeof DashboardUsersUserImport
+      parentRoute: typeof DashboardUsersRouteImport
+    }
     '/dashboard/invoices/': {
       id: '/dashboard/invoices/'
       path: '/'
@@ -220,6 +233,7 @@ export const routeTree = rootRoute.addChildren({
       DashboardInvoicesIndexRoute,
     }),
     DashboardUsersRouteRoute: DashboardUsersRouteRoute.addChildren({
+      DashboardUsersUserRoute,
       DashboardUsersIndexRoute,
     }),
     DashboardIndexRoute,
@@ -281,6 +295,7 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "dashboard/users/route.tsx",
       "parent": "/dashboard",
       "children": [
+        "/dashboard/users/user",
         "/dashboard/users/"
       ]
     },
@@ -303,6 +318,10 @@ export const routeTree = rootRoute.addChildren({
     "/dashboard/invoices/$invoiceId": {
       "filePath": "dashboard/invoices/$invoiceId.tsx",
       "parent": "/dashboard/invoices"
+    },
+    "/dashboard/users/user": {
+      "filePath": "dashboard/users/user.tsx",
+      "parent": "/dashboard/users"
     },
     "/dashboard/invoices/": {
       "filePath": "dashboard/invoices/index.tsx",
