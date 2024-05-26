@@ -99,12 +99,10 @@ const DashboardUsersUserRoute = DashboardUsersUserImport.update({
   getParentRoute: () => DashboardUsersRouteRoute,
 } as any)
 
-const DashboardInvoicesInvoiceIdRoute = DashboardInvoicesInvoiceIdImport.update(
-  {
-    path: '/$invoiceId',
-    getParentRoute: () => DashboardInvoicesRouteRoute,
-  } as any,
-)
+const DashboardInvoicesInvoiceIdRoute = DashboardInvoicesInvoiceIdImport.update({
+  path: '/$invoiceId',
+  getParentRoute: () => DashboardInvoicesRouteRoute,
+} as any)
 
 // Populate the FileRoutesByPath interface
 

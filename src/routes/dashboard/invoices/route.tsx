@@ -14,7 +14,7 @@ function InvoicesComponent() {
   return (
     <div className="flex flex-1">
       {/* stupid height calculation, radix ui scrollarea full height */}
-      <ScrollArea className={`h-[calc(100dvh-64.8px-48.8px-48.8px)] w-60`}>
+      <ScrollArea className="h-[calc(100dvh-64.8px-48.8px-48.8px)] w-60">
         <div className="flex flex-col divide-y border-r">
           {invoices.map((invoice) => (
             <Link
