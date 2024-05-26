@@ -17,7 +17,7 @@ function UserComponent() {
   const { data: user } = useSuspenseQuery(userQueryOptions(search.userId))
 
   return (
-    <div className="flex flex-col gap-3 p-3">
+    <div className="flex flex-col gap-3 p-3 text-foreground/70">
       <h3 className="font-bold">{user?.name}</h3>
       <pre className="whitespace-pre-wrap text-sm">{JSON.stringify(user, null, 2)}</pre>
     </div>

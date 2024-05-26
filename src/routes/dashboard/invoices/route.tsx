@@ -1,7 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
-import { Link, MatchRoute, Outlet, createFileRoute } from '@tanstack/react-router'
+import { Link, Outlet, createFileRoute } from '@tanstack/react-router'
 import { invoicesQueryOptions } from '~/utils/api'
-import { cn } from '~/utils/cn'
 
 export const Route = createFileRoute('/dashboard/invoices')({
   loader: ({ context }) => context.queryClient.ensureQueryData(invoicesQueryOptions()),
@@ -13,7 +12,7 @@ function InvoicesComponent() {
 
   return (
     <div className="flex flex-1">
-      <div className="flex h-full w-52 flex-col divide-y border-r">
+      <div className="flex h-full w-60 flex-col divide-y border-r">
         {invoices.map((invoice) => (
           <Link
             key={invoice.id}
