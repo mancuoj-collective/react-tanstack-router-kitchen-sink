@@ -1,5 +1,6 @@
 import { useSuspenseQuery } from '@tanstack/react-query'
 import { Link, Outlet, createFileRoute } from '@tanstack/react-router'
+import { useEffect, useRef, useState } from 'react'
 import { ScrollArea } from '~/components/ui/scroll-area'
 import { invoicesQueryOptions } from '~/utils/api'
 
@@ -10,11 +11,26 @@ export const Route = createFileRoute('/dashboard/invoices')({
 
 function InvoicesComponent() {
   const { data: invoices } = useSuspenseQuery(invoicesQueryOptions())
+  const [height, setHeight] = useState(0)
+  const scrollAreaRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    function updateHeight() {
+      if (scrollAreaRef.current) {
+        const topOffset = scrollAreaRef.current.getBoundingClientRect().top
+        setHeight(window.innerHeight - topOffset)
+      }
+    }
+    updateHeight()
+    window.addEventListener('resize', updateHeight)
+    return () => {
+      window.removeEventListener('resize', updateHeight)
+    }
+  }, [])
 
   return (
     <div className="flex flex-1">
-      {/* stupid height calculation, radix ui scrollarea full height */}
-      <ScrollArea className="h-[calc(100dvh-64.8px-48.8px-48.8px)] w-60">
+      <ScrollArea ref={scrollAreaRef} style={{ height }} className="w-60">
         <div className="flex flex-col divide-y border-r">
           {invoices.map((invoice) => (
             <Link

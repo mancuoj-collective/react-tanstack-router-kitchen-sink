@@ -56,4 +56,13 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  html::-webkit-scrollbar {
+    display: none;
+  }
 }
